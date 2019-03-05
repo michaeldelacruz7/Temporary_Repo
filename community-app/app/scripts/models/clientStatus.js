@@ -90,6 +90,12 @@
                         taskPermissionName: "UPDATE_CLIENT"
                     },
                     {
+                        name: "label.button.creditscore",
+                        href: "#/scorecard",
+                        icon: "fa fa-list-alt",
+                        taskPermissionName: 'CREATE_LOANCHARGE'
+                    },
+                    {
                         name: "label.button.newloan",
                         href: "#/newclientloanaccount",
                         icon: "fa fa-plus",

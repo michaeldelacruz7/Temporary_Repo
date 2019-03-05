@@ -127,18 +127,18 @@ public final class LoanApplicationCommandFromApiJsonHelper {
             final Long clientId = this.fromApiJsonHelper.extractLongNamed("clientId", element);
             final Long groupId = this.fromApiJsonHelper.extractLongNamed("groupId", element);
             if (loanType.isIndividualAccount()) {
-                baseDataValidator.reset().parameter("clientId").value(clientId).notNull().longGreaterThanZero();
-                baseDataValidator.reset().parameter("groupId").value(groupId).mustBeBlankWhenParameterProvided("clientId", clientId);
+                // baseDataValidator.reset().parameter("clientId").value(clientId).notNull().longGreaterThanZero();
+                // baseDataValidator.reset().parameter("groupId").value(groupId).mustBeBlankWhenParameterProvided("clientId", clientId);
             }
 
             if (loanType.isGroupAccount()) {
-                baseDataValidator.reset().parameter("groupId").value(groupId).notNull().longGreaterThanZero();
-                baseDataValidator.reset().parameter("clientId").value(clientId).mustBeBlankWhenParameterProvided("groupId", groupId);
+                // baseDataValidator.reset().parameter("groupId").value(groupId).notNull().longGreaterThanZero();
+                // baseDataValidator.reset().parameter("clientId").value(clientId).mustBeBlankWhenParameterProvided("groupId", groupId);
             }
 
             if (loanType.isJLGAccount()) {
-                baseDataValidator.reset().parameter("clientId").value(clientId).notNull().integerGreaterThanZero();
-                baseDataValidator.reset().parameter("groupId").value(groupId).notNull().longGreaterThanZero();
+                // baseDataValidator.reset().parameter("clientId").value(clientId).notNull().integerGreaterThanZero();
+                // baseDataValidator.reset().parameter("groupId").value(groupId).notNull().longGreaterThanZero();
 
                 // if it is JLG loan that must have meeting details
                 if (isMeetingMandatoryForJLGLoans) {

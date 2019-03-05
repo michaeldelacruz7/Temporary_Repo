@@ -617,9 +617,11 @@
                 scope.loandetails.productName = scope.formValue(scope.products,scope.loanAccount.productId,'id','name');
             };
 
+            scope.changePreviewRepayment = function() {
+                scope.previewRepayment = !scope.previewRepayment;
+            }
+
             scope.previewRepayments = function () {
-                console.log("Not Inside Promise");
-                console.log(scope.previewRepayment);
                 // Make sure charges and collaterals are empty before initializing.
                 var reqFirstDate = dateFilter(scope.first.submitondate, scope.df);
                 var reqSecondDate = dateFilter(scope.date.second, scope.df);
@@ -642,7 +644,6 @@
                 prevRepayData.interestType = scope.loanAccount.interestType;
                 prevRepayData.interestCalculationPeriodType = scope.loanAccount.interestCalculationPeriodType;
                 prevRepayData.transactionProcessingStrategyId = scope.loanAccount.transactionProcessingStrategyId;
-                prevRepayData.clientId = 1;
                 if(prevRepayData.interestCalculationPeriodType == 0){
                     this.loanAccount.allowPartialPeriodInterestCalcualtion = false;
                 }
@@ -650,8 +651,6 @@
                     scope.repaymentscheduleinfo = data;
                     scope.previewRepayment = true;
                     scope.formData.syncRepaymentsWithMeeting = scope.syncRepaymentsWithMeeting;
-                    console.log("Inside Promise");
-                    console.log(scope.previewRepayment);
                 });
 
             }
