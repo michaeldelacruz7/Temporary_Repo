@@ -1,0 +1,61 @@
+<div class="content-container" ng-controller="ScoreCardController">
+	<div class="card">
+        <div class="content">
+            <form class="form-horizontal" novalidate="" name="scorecard">
+                <fieldset>
+                    <legend>{{ 'label.heading.creditscore' | translate }}</legend>
+                    <div ng-repeat="rule in rules track by $index">
+		                <div ng-switch on="rule.type">
+		                    <div ng-switch-when="1" id="rangeType" class="form-group">
+			                    <label class="control-label col-sm-2" for="type">{{rule.name}}</label>
+			                    <div class="col-sm-3">
+		                       		<input type="text" id="{{rule.name}}" name="attribute" ng-model="dataModel[$index]"  class="form-control">
+			                    </div>
+		                    </div>
+		                    <div ng-switch-when="2" id="choice" class="form-group">
+								<label class="control-label col-sm-2" for="type">{{rule.name}}</label>
+			                    <div class="col-sm-3">
+			                            <select chosen id="{{rule.name}}" ng-model="dataModel[$index]" class="form-control"
+			                            ng-options="rule.value as rule.name for rule in rule.typeData track by rule.value">
+			                                <option value="" class="hidden"></option>
+			                            </select>
+			                    </div>	
+		                    </div>
+		                </div>
+                    </div>
+
+	                <div class="row">
+	                    <div class="form-group">
+	                        <label class="control-label col-sm-2" for="weightedvalue">{{ 'label.heading.creditscore' | translate }}</label>
+
+	                        <div class="col-sm-3">
+	                            <p id="weightedvalue" name="weightedvalue" >{{creditScore}}</p>
+	                        </div>
+	                    </div>
+	                </div>
+
+	                <div class="row">
+	                    <div class="form-group">
+	                        <label class="control-label col-sm-2" for="weightedvalue">{{ 'label.heading.formula' | translate }}</label>
+
+	                        <div class="col-sm-3">
+			                    <div class="col-sm-3">
+		                            <select chosen="formula" id="formula" ng-model="formula" ng-change='changeFormula(formula)' class="form-control"
+		                            ng-options="formula as formula.formulaname for formula in formulas">
+		                                <option value="" class="hidden"></option>
+		                            </select>
+			                    </div>
+	                        </div>
+	                    </div>
+	                </div>
+
+                    <button id="save" type="submit" ng-click="submit()" ng-disabled="!formula" class="btn btn-primary">{{
+                        'label.button.getcreditscore' | translate }}
+                    </button>
+
+                    <a id="back" ng-href="#/viewloanaccount/{{loanId}}" class="btn btn-default">{{'label.button.back' | translate}}</a>
+                </fieldset>
+            </form>    
+        </div>
+    </div>
+</div>
