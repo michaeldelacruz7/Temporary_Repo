@@ -1019,7 +1019,7 @@
             .when('/externalservicesCB/CreditBureau/mapcblp', {
                 templateUrl: 'views/administration/MapCreditBureauToLP.html'
             })
-            .when('/loan/:loanId/scorecard/', {
+            .when('/scorecard/:loanId/', {
                 templateUrl: 'views/loans/scorecard.html'
             })
             .when('/scoremanager/', {

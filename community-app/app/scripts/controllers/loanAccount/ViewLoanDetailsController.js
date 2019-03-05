@@ -33,9 +33,9 @@
                     case "addloancharge":
                         location.path('/addloancharge/' + accountId);
                         break;
-                    case "creditscore":
-                        location.path('/loan/' + accountId + '/scorecard/');
-                        break;
+                    // case "creditscore":
+                    //     location.path('/loan/' + accountId + '/scorecard/');
+                    //     break;
                     case "addcollateral":
                         location.path('/addcollateral/' + accountId);
                         break;
@@ -189,11 +189,11 @@
                             icon: "fa fa-plus",
                             taskPermissionName: 'CREATE_LOANCHARGE'
                         },
-                        {
-                            name: "button.creditscore",
-                            icon: "fa fa-list-alt",
-                            taskPermissionName: 'CREATE_LOANCHARGE'
-                        },
+                        // {
+                        //     name: "button.creditscore",
+                        //     icon: "fa fa-list-alt",
+                        //     taskPermissionName: 'CREATE_LOANCHARGE'
+                        // },
                         {
                             name: "button.approve",
                             icon: "fa fa-check",
