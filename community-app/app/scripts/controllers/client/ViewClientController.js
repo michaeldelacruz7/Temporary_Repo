@@ -1,6 +1,6 @@
 (function (module) {
     mifosX.controllers = _.extend(module, {
-        ViewClientController: function (scope, routeParams, route, location, resourceFactory, http, $uibModal, API_VERSION, $rootScope, Upload) {
+        ViewClientController: function (scope, routeParams, route, location, resourceFactory, http, $uibModal, API_VERSION, $rootScope, Upload, creditBureauServices) {
             scope.client = [];
             scope.identitydocuments = [];
             scope.buttons = [];
@@ -16,6 +16,7 @@
             scope.creditLeft;
             scope.revolvingLoan = [];
             scope.numOfRevolvingLoan = 0;
+            scope.creditBureau;
 
 
             // address
@@ -177,6 +178,7 @@
                 scope.client = data;
                 scope.isClosedClient = scope.client.status.value == 'Closed';
                 scope.staffData.staffId = data.staffId;
+                scope.getCreditBureau();
                 if (data.imagePresent) {
                     http({
                         method: 'GET',
@@ -931,10 +933,26 @@
                 };
             };
 
+            scope.getCreditBureau = function(){
+                resourceFactory.creditBureauSummary.get( function (data) {
+                    scope.creditBureauName = data[0].creditBureauName;
+                });
+                if(!scope.creditBureau){
+                    scope.creditBureau = {};
+                    scope.creditBureau = creditBureauServices.createCreditBureauData();
+                }
+                scope.creditBureau.firstName = scope.client.firstname;
+                scope.creditBureau.middleName = !scope.client.middlename ? "" : scope.client.middlename;
+                scope.creditBureau.lastName = scope.client.lastname;
+                // scope.creditBureau.gender = scope.client.gender.active ? scope.client.gender : "";
+                scope.creditBureau.dateofbirth = !scope.client.dateOfBirth ? "" : scope.client.dateOfBirth[1] + "/" + scope.client.dateOfBirth[2] + "/" + scope.client.dateOfBirth[0];
+                scope.creditBureau.civilstatus = !scope.client.civilstatus ? "" : scope.client.civilstatus;
+                scope.creditBureau.nationality = !scope.client.nationality ? "" : scope.client.nationality;
+            };
         }
     });
 
-    mifosX.ng.application.controller('ViewClientController', ['$scope', '$routeParams', '$route', '$location', 'ResourceFactory', '$http', '$uibModal', 'API_VERSION', '$rootScope', 'Upload', mifosX.controllers.ViewClientController]).run(function ($log) {
+    mifosX.ng.application.controller('ViewClientController', ['$scope', '$routeParams', '$route', '$location', 'ResourceFactory', '$http', '$uibModal', 'API_VERSION', '$rootScope', 'Upload', 'creditBureauServices', mifosX.controllers.ViewClientController]).run(function ($log) {
         $log.info("ViewClientController initialized");
     });
 }(mifosX.controllers || {}));
