@@ -1136,6 +1136,97 @@
 					  <object height="60%" width="70%" ng-show="preview" data="{{fileUrl}}" type="{{fileType}}"></object>
 				  </div>
 				</uib-tab>
+				<uib-tab heading="{{'label.heading.creditbureau' | translate}}" select="getCreditBureau()" has-permission='READ_DOCUMENT'>
+					<h1 class="page-header">{{creditBureauName}}</h1>
+					<br>
+					<div class="container-fluid">
+						<div class="row">
+							<div class="col-sm-3">
+			                    <label class="control-label col-sm-6" for="firstName">{{ 'label.input.firstname' | translate }}</label>
+								<div class="col-sm-6">
+									<p id="firstName" name="firstName">{{creditBureau.firstName}}</p>
+								</div>
+							</div>
+							<div class="col-sm-3">
+			                    <label class="control-label col-sm-6" for="middleName">{{ 'label.input.middlename' | translate }}</label>
+								<div class="col-sm-6">
+									<p id="middleName" name="middleName">{{creditBureau.middleName}}</p>
+								</div>
+							</div>
+							<div class="col-sm-3">
+			                    <label class="control-label col-sm-6" for="lastName">{{ 'label.input.lastname' | translate }}</label>
+								<div class="col-sm-6">
+									<p id="lastName" name="lastName">{{creditBureau.lastName}}</p>
+								</div>
+							</div>
+						</div>
+						<br>
+						<div class="row">
+							<div class="col-sm-3">
+			                    <label class="control-label col-sm-6" for="gender">{{ 'label.input.gender' | translate }}</label>
+								<div class="col-sm-6">
+									<p id="gender" name="gender">{{creditBureau.gender}}</p>
+								</div>
+							</div>
+							<div class="col-sm-3">
+								<label class="control-label col-sm-6" for="dateofbirth">{{ 'label.input.dateofbirth' | translate }}</label>
+								<div class="col-sm-6">
+									<p id="dateofbirth" name="dateofbirth">{{creditBureau.dateofbirth}}</p>
+								</div>
+							</div>
+							<div class="col-sm-3">
+			                    <label class="control-label col-sm-6" for="civilstatus">{{ 'label.input.civilstatus' | translate }}</label>
+								<div class="col-sm-6">
+									<p id="civilstatus" name="civilstatus">{{creditBureau.civilstatus}}</p>
+								</div>
+							</div>
+							<div class="col-sm-3">
+			                    <label class="control-label col-sm-6" for="nationality">{{ 'label.input.nationality' | translate }}</label>
+								<div class="col-sm-6">
+									<p id="nationality" name="nationality">{{creditBureau.nationality}}</p>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<h3 class="page-header">{{'label.heading.negativeevent' | translate}}</h3>
+							<ul class="list-group">
+								<li class="list-group-item" ng-repeat="negativeEvent in creditBureau.negativeEvents">
+									<div class="row">
+				                   		<label class="control-label col-sm-2" for="provider">{{ 'label.input.provider' | translate }}</label>
+										<div class="col-sm-2">
+											<p id="provider" name="provider">{{negativeEvent.provider}}</p>
+										</div>
+					                    <label class="control-label col-sm-2" for="description">{{ 'label.input.description' | translate }}</label>
+										<div class="col-sm-2">
+											<p id="description" name="description">{{negativeEvent.description}}</p>
+										</div>
+									</div>
+									<div class="row">
+				                   		<label class="control-label col-sm-2" for="detail">{{ 'label.input.detail' | translate }}</label>
+										<div class="col-sm-2">
+											<p id="detail" name="detail">{{negativeEvent.detail}}</p>
+										</div>
+									</div>
+									<div class="row">
+				                   		<label class="control-label col-sm-2" for="eventdate">{{ 'label.input.eventdate' | translate }}</label>
+										<div class="col-sm-2">
+											<p id="eventdate" name="eventdate">{{negativeEvent.eventdate}}</p>
+										</div>
+				                   		<label class="control-label col-sm-2" for="status">{{ 'label.input.status' | translate }}</label>
+										<div class="col-sm-2">
+											<p id="status" name="status">{{negativeEvent.status}}</p>
+										</div>
+				                   		<label class="control-label col-sm-2" for="statusdate">{{ 'label.input.statusdate' | translate }}</label>
+										<div class="col-sm-2">
+											<p id="statusdate" name="statusdate">{{negativeEvent.statusdate}}</p>
+										</div>
+									</div>
+								</li>
+							</ul>
+							<p class="text-center" ng-hide="creditBureau.negativeEvents">{{'label.heading.nonegativeevent' | translate}}</p>
+						</div>
+					</div>
+				</uib-tab>
 				<uib-tab heading="{{clientdatatable.registeredTableName}}" ng-repeat="clientdatatable in clientdatatables"
 						 select="dataTableChange(clientdatatable)" has-permission='READ_{{clientdatatable.registeredTableName}}'>
 					<api-validate></api-validate>

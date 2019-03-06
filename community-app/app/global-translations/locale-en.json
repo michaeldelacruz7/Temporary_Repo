@@ -4333,5 +4333,17 @@
   "reportRunFrequency.yearly": "Yearly",
   "reportRunFrequency.custom": "Custom",
   "label.heading.activate.group": "Activate Group",
-  "----End---": "--End of file--- "
+  "----End---": "--End of file--- ",
+
+  "label.heading.creditbureau": "Credit Bureau",
+  "label.input.civilstatus": "Civil Status",
+  "label.input.nationality": "Nationality",
+  "label.input.provider": "Provider",
+  "label.input.description": "Description",
+  "label.input.detail": "Detail",
+  "label.input.eventdate": "Event Date",
+  "label.input.status": "Status",
+  "label.input.statusdate": "Status Date",
+  "label.heading.negativeevent": "Negative Event",
+  "label.heading.nonegativeevent": "---No Negative Event--- "
 }
