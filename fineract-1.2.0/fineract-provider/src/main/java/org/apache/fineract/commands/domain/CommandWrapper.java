@@ -41,6 +41,7 @@ public class CommandWrapper {
     private final Long creditBureauId;
     private final Long organisationCreditBureauId;
     private final Integer creditScoreId;
+    private final Long formulaId;
 
     @SuppressWarnings("unused")
     private Long templateId;
@@ -49,21 +50,21 @@ public class CommandWrapper {
         return new CommandWrapper(null, actionName, entityName, resourceId, subresourceId, null, null);
     }
 
-    public static CommandWrapper fromExistingCommand(final Long commandId, final String actionName, final String entityName,
-            final Long resourceId, final Long subresourceId, final String resourceGetUrl, final Long productId) {
+    public static CommandWrapper fromExistingCommand(final Long commandId, final String actionName, final String entityName, final Long resourceId,
+            final Long subresourceId, final String resourceGetUrl, final Long productId) {
         return new CommandWrapper(commandId, actionName, entityName, resourceId, subresourceId, resourceGetUrl, productId);
     }
 
-    public static CommandWrapper fromExistingCommand(final Long commandId, final String actionName, final String entityName,
-            final Long resourceId, final Long subresourceId, final String resourceGetUrl, final Long productId, final Long officeId,
-            final Long groupId, final Long clientId, final Long loanId, final Long savingsId, final String transactionId,
-            final Long creditBureauId,final Long organisationCreditBureauId, final Integer creditScoreId) {
-        return new CommandWrapper(commandId, actionName, entityName, resourceId, subresourceId, resourceGetUrl, productId, officeId,
-                groupId, clientId, loanId, savingsId, transactionId,creditBureauId,organisationCreditBureauId, creditScoreId);
+    public static CommandWrapper fromExistingCommand(final Long commandId, final String actionName, final String entityName, final Long resourceId,
+            final Long subresourceId, final String resourceGetUrl, final Long productId, final Long officeId, final Long groupId, final Long clientId, final Long loanId,
+            final Long savingsId, final String transactionId, final Long creditBureauId, final Long organisationCreditBureauId, final Integer creditScoreId,
+            final Long formulaId) {
+        return new CommandWrapper(commandId, actionName, entityName, resourceId, subresourceId, resourceGetUrl, productId, officeId, groupId, clientId, loanId,
+                savingsId, transactionId, creditBureauId, organisationCreditBureauId, creditScoreId, formulaId);
     }
 
-    private CommandWrapper(final Long commandId, final String actionName, final String entityName, final Long resourceId,
-            final Long subresourceId, final String resourceGetUrl, final Long productId) {
+    private CommandWrapper(final Long commandId, final String actionName, final String entityName, final Long resourceId, final Long subresourceId,
+            final String resourceGetUrl, final Long productId) {
         this.commandId = commandId;
         this.officeId = null;
         this.groupId = null;
@@ -82,12 +83,12 @@ public class CommandWrapper {
         this.creditBureauId=null;
         this.organisationCreditBureauId=null;
         this.creditScoreId=null;
+        this.formulaId=null;
     }
 
-    public CommandWrapper(final Long officeId, final Long groupId, final Long clientId, final Long loanId, final Long savingsId,
-            final String actionName, final String entityName, final Long entityId, final Long subentityId, final String href,
-            final String json, final String transactionId, final Long productId, final Long templateId,
-            final Long creditBureauId,final Long organisationCreditBureauId, final Integer creditScoreId) {
+    public CommandWrapper(final Long officeId, final Long groupId, final Long clientId, final Long loanId, final Long savingsId, final String actionName,
+            final String entityName, final Long entityId, final Long subentityId, final String href, final String json, final String transactionId, final Long productId,
+            final Long templateId, final Long creditBureauId, final Long organisationCreditBureauId, final Integer creditScoreId, final Long formulaId) {
 
         this.commandId = null;
         this.officeId = officeId;
@@ -108,12 +109,12 @@ public class CommandWrapper {
         this.creditBureauId=creditBureauId;
         this.organisationCreditBureauId=organisationCreditBureauId;
         this.creditScoreId=creditScoreId;
+        this.formulaId = formulaId;
     }
 
-    private CommandWrapper(final Long commandId, final String actionName, final String entityName, final Long resourceId,
-            final Long subresourceId, final String resourceGetUrl, final Long productId, final Long officeId, final Long groupId,
-            final Long clientId, final Long loanId, final Long savingsId, final String transactionId,
-            final Long creditBureauId,final Long organisationCreditBureauId, final Integer creditScoreId) {
+    private CommandWrapper(final Long commandId, final String actionName, final String entityName, final Long resourceId, final Long subresourceId,
+            final String resourceGetUrl, final Long productId, final Long officeId, final Long groupId, final Long clientId, final Long loanId, final Long savingsId,
+            final String transactionId, final Long creditBureauId, final Long organisationCreditBureauId, final Integer creditScoreId, final Long formulaId) {
 
         this.commandId = commandId;
         this.officeId = officeId;
@@ -133,6 +134,11 @@ public class CommandWrapper {
         this.creditBureauId=creditBureauId;
         this.organisationCreditBureauId=organisationCreditBureauId;
         this.creditScoreId=creditScoreId;
+        this.formulaId = formulaId;
+    }
+    
+    public Long getFormulaId() {
+        return this.formulaId;
     }
     
     public Integer getCreditScoreId() {

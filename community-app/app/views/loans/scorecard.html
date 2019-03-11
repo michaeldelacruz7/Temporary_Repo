@@ -4,6 +4,22 @@
             <form class="form-horizontal" novalidate="" name="scorecard">
                 <fieldset>
                     <legend>{{ 'label.heading.creditscore' | translate }}</legend>
+
+	                <div class="row" ng-if="formulas.length > 0">
+	                    <div class="form-group">
+	                        <label class="control-label col-sm-2" for="weightedvalue">{{ 'label.heading.formula' | translate }}</label>
+
+	                        <div class="col-sm-3">
+			                    <div class="col-sm-3">
+		                            <select chosen id="formula" ng-model="formula" class="form-control" ng-change="changeFormula(formula)"
+		                            ng-options="formula as formula.formulaName for formula in formulas track by formula.id">
+		                                <option value="" class="hidden"></option>
+		                            </select>
+			                    </div>
+	                        </div>
+	                    </div>
+	                </div>
+
                     <div ng-repeat="rule in rules track by $index">
 		                <div ng-switch on="rule.type">
 		                    <div ng-switch-when="1" id="rangeType" class="form-group">
@@ -30,21 +46,6 @@
 
 	                        <div class="col-sm-3">
 	                            <p id="weightedvalue" name="weightedvalue" >{{creditScore}}</p>
-	                        </div>
-	                    </div>
-	                </div>
-
-	                <div class="row">
-	                    <div class="form-group">
-	                        <label class="control-label col-sm-2" for="weightedvalue">{{ 'label.heading.formula' | translate }}</label>
-
-	                        <div class="col-sm-3">
-			                    <div class="col-sm-3">
-		                            <select chosen="formula" id="formula" ng-model="formula" ng-change='changeFormula(formula)' class="form-control"
-		                            ng-options="formula as formula.formulaname for formula in formulas">
-		                                <option value="" class="hidden"></option>
-		                            </select>
-			                    </div>
 	                        </div>
 	                    </div>
 	                </div>

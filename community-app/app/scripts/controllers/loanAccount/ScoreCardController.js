@@ -2,14 +2,12 @@
     mifosX.controllers = _.extend(module, {
         ScoreCardController: function (scope, routeParams, resourceFactory, location, creditRuleServices) {
             scope.rules = [];
-            scope.formula = [];
             scope.formulas = [];
             scope.dataModel = [];
             scope.data = [];
             scope.localData = [];
             scope.creditScore = 0;
             scope.loanId = 0;
-            scope.chosenFormula = [];
 
             scope.init = function(){
                 scope.loanId = routeParams.loanId;
@@ -21,8 +19,17 @@
                     scope.arrangeData();
                     scope.dataModel = new Array(scope.rules.length);
                 });
-                scope.formulas = creditRuleServices.getFormulasEnabled();
+                resourceFactory.scoreFormulaResource.getScoreFormulaList({
+                }, function (data) {
+                    scope.formulas = data.filter(function(formula){
+                        return formula.status != "Disabled";
+                    });
+                });
             };
+
+            scope.changeFormula = function(formula){
+                scope.formula = formula;
+            }
 
             scope.arrangeData = function(){
                 scope.localData.forEach(function(datum){
@@ -55,7 +62,6 @@
                         scope.localData[rule.id].ruleTypeDataList.forEach(function(typeDatum){
                             if(rule.value >= typeDatum.minValue && rule.value <= typeDatum.maxValue){
                                 var value = 0;
-                                console.log(typeDatum.relativeValue);
                                 value = typeDatum.relativeValue * (!scope.localData[rule.id].weightedValue ? 1 : scope.localData[rule.id].weightedValue);
                                 scope.creditScore = scope.creditScore.replace(scope.localData[rule.id].tag, value);
                             }
