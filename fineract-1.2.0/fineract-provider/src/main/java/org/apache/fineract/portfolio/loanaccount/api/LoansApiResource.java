@@ -823,6 +823,9 @@ public class LoansApiResource {
         } else if (is(commandParam, "recoverGuarantees")) {
             final CommandWrapper commandRequest = new CommandWrapperBuilder().recoverFromGuarantor(loanId).build();
             result = this.commandsSourceWritePlatformService.logCommandSource(commandRequest);
+        } else if (is(commandParam, "transferloan")) {
+            final CommandWrapper commandRequest =  builder.transferLoan(loanId).build();
+            result = this.commandsSourceWritePlatformService.logCommandSource(commandRequest);
         }
 
         if (result == null) { throw new UnrecognizedQueryParamException("command", commandParam); }

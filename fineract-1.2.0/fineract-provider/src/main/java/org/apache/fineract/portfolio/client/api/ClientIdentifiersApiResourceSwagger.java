@@ -18,10 +18,10 @@
  */
 package org.apache.fineract.portfolio.client.api;
 
+import java.util.Set;
+
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-
-import java.util.Set;
 
 /**
  * Created by Chirag Gupta on 01/13/18.

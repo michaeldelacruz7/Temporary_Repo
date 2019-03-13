@@ -52,6 +52,15 @@ public class CommandWrapperBuilder {
                 this.subentityId, this.href, this.json, this.transactionId, this.productId, this.templateId, this.creditBureauId, this.organisationCreditBureauId,
                 this.creditScoreId, this.formulaId);
     }
+
+    public CommandWrapperBuilder transferLoan(final Long loanId) {
+        this.actionName = "TRANSFERLOAN";
+        this.entityName = "LOAN";
+        this.entityId = loanId;
+        this.loanId = loanId;
+        this.href = "/loans/" + loanId + "?command=transferloan";
+        return this;
+    }
     
     public CommandWrapperBuilder updateCreditScoreFormula(final long id) {
         this.actionName = "UPDATE";

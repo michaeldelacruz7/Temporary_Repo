@@ -190,6 +190,7 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
+import org.apache.fineract.portfolio.client.domain.ClientRepositoryWrapper;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
@@ -238,6 +239,7 @@ public class LoanWritePlatformServiceJpaRepositoryImpl implements LoanWritePlatf
     private final LoanRepaymentScheduleTransactionProcessorFactory transactionProcessingStrategy;
     private final CodeValueRepositoryWrapper codeValueRepository;
     private final CashierTransactionDataValidator cashierTransactionDataValidator;
+    private final ClientRepositoryWrapper clientRepository;
 
     @Autowired
     public LoanWritePlatformServiceJpaRepositoryImpl(final PlatformSecurityContext context,
@@ -268,7 +270,8 @@ public class LoanWritePlatformServiceJpaRepositoryImpl implements LoanWritePlatf
             final LoanRepaymentScheduleTransactionProcessorFactory transactionProcessingStrategy,
             final CodeValueRepositoryWrapper codeValueRepository,
             final LoanRepositoryWrapper loanRepositoryWrapper,
-            final CashierTransactionDataValidator cashierTransactionDataValidator) {
+            final CashierTransactionDataValidator cashierTransactionDataValidator,
+            final ClientRepositoryWrapper clientRepository) {
         this.context = context;
         this.loanEventApiJsonValidator = loanEventApiJsonValidator;
         this.loanAssembler = loanAssembler;
@@ -307,6 +310,7 @@ public class LoanWritePlatformServiceJpaRepositoryImpl implements LoanWritePlatf
         this.entityDatatableChecksWritePlatformService = entityDatatableChecksWritePlatformService;
         this.codeValueRepository = codeValueRepository;
         this.cashierTransactionDataValidator = cashierTransactionDataValidator;
+        this.clientRepository = clientRepository;
     }
 
     private LoanLifecycleStateMachine defaultLoanLifecycleStateMachine() {
@@ -3027,4 +3031,26 @@ public class LoanWritePlatformServiceJpaRepositoryImpl implements LoanWritePlatf
 		}
 
 	}
+    
+    @Override
+    @Transactional
+    public CommandProcessingResult transferLoan(Long loanId, JsonCommand command) {
+        final AppUser currentUser = getAppUserIfPresent();
+
+        final Loan loan = this.loanAssembler.assembleFrom(loanId);
+        final long clientId = command.longValueOfParameterNamed("clientId");
+        final Client toClient = this.clientRepository.findOneWithNotFoundDetection(clientId);
+        loan.updateClient(toClient);
+
+        saveAndFlushLoanWithDataIntegrityViolationChecks(loan);
+
+        return new CommandProcessingResultBuilder() //
+                .withCommandId(command.commandId()) //
+                .withEntityId(loan.getId()) //
+                .withOfficeId(loan.getOfficeId()) //
+                .withClientId(loan.getClientId()) //
+                .withGroupId(loan.getGroupId()) //
+                .withLoanId(loanId)
+                .build();
+    }
 }

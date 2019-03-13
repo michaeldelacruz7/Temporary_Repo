@@ -18,12 +18,12 @@
  */
 package org.apache.fineract.portfolio.client.api;
 
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
-
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.Set;
+
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 
 /**
  * Created by Chirag Gupta on 01/13/18.

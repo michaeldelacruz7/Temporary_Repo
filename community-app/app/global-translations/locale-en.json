@@ -4345,5 +4345,11 @@
   "label.input.status": "Status",
   "label.input.statusdate": "Status Date",
   "label.heading.negativeevent": "Negative Event",
-  "label.heading.nonegativeevent": "---No Negative Event--- "
+  "label.heading.nonegativeevent": "---No Negative Event--- ",
+  "label.heading.loantransfer": "Transfer Loan",
+  "label.button.transferloan": "Transfer Loan",
+  "label.heading.loanApplication": "Loan Application",
+  "label.heading.transferto": "Transfer To",
+  "label.heading.currentaccnum": "Current Account No",
+  "label.heading.currentclient": "Current Client"
 }
