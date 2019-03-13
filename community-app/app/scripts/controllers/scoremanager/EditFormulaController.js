@@ -9,16 +9,20 @@
             scope.addText = function(index){
                 var tagData = scope.rules[index].tag;
                 scope.formula = scope.formula.concat(" " + tagData + " ");
+                document.getElementById("formula").focus();
             }
 
             scope.submit = function(){
                 var data = {
-                    "formulaname":scope.formulaname,
+                    "formulaName":scope.formulaname,
                     "formula":scope.formula,
-                    "status":"Enabled"
+                    "status":scope.formulaData.status
                 };
-                creditRuleServices.setFormulaIndex(routeParams.id, data);
-                location.path('/scoremanager/');
+
+                resourceFactory.formulaResource.editScoreFormula({formulaId: routeParams.id}, data, function(data)
+                {
+                    location.path('/viewformula/'+ routeParams.id);
+                });
             }
 
             scope.getFormulaData = function(){
@@ -28,21 +32,14 @@
                         return rule.status != "Disabled";
                     });
                 });
-                scope.formulaData = creditRuleServices.getFormulaIndex(routeParams.id);
-                scope.formula = scope.formulaData.formula;
-                scope.formulaname = scope.formulaData.formulaname;
-            };
 
-            // resourceFactory.ruleResources.get(function(data)
-            // {
-            //     scope.attribute = data.attribute;
-            //     scope.weightedvalue = data.weightedValue;
-            //     scope.type = data.type;
-            //     for(i = 0; i < data.typeData.length; i++){
-            //         scope.displayedForms.push(forms[scope.type]);
-            //     }
-            //     scope.typeData = data.typeData;
-            // });
+                resourceFactory.formulaResource.getScoreFormula({formulaId: routeParams.id}, function(data)
+                {
+                    scope.formulaData = data;
+                    scope.formula = scope.formulaData.formula;
+                    scope.formulaname = scope.formulaData.formulaName;
+                });
+            };
 
             scope.routeTo = function(){
                 location.path('/viewformula/'+ routeParams.id);

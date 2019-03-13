@@ -14,15 +14,19 @@
                 document.getElementById("formula").focus();
             }
 
+
             scope.submit = function(){
                 var data = {
-                    "formulaname":scope.formulaname,
+                    "formulaName":scope.formulaname,
                     "formula":scope.formula,
                     "status":"Enabled"
                 };
-                creditRuleServices.addFormula(data);
-                location.path('/scoremanager/');
-            };
+
+                resourceFactory.scoreFormulaResource.addScoreFormula(data, function(data)
+                {
+                    location.path('/scoremanager');
+                });
+            }
 
             scope.initPage = function(){
                 resourceFactory.scoreManagerResource.getScoreRuleList({

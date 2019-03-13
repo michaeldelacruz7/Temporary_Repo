@@ -46,12 +46,12 @@ public interface ClientReadPlatformService {
     Collection<ClientData> retrieveActiveClientMembersOfCenter(final Long centerId);
 
     ClientData retrieveAllNarrations(String clientNarrations);
-    
-	Date retrieveClientTransferProposalDate(Long clientId);
 
-	Date retrieveClientTransferProposalDateByLoan(Long clientId);
+    Date retrieveClientTransferProposalDate(Long clientId);
 
-	Date retrieveClientTransferProposalDateBySavings(Long clientId);
+    Date retrieveClientTransferProposalDateByLoan(Long clientId);
 
-	void validateClient(Long clientId);
+    Date retrieveClientTransferProposalDateBySavings(Long clientId);
+
+    void validateClient(Long clientId);
 }

@@ -16,6 +16,7 @@
                 }
             ];
             scope.totalRules = 0;
+            scope.totalFormulas = 0;
             scope.type = [];
             scope.rulesPerPage = 15;
 
@@ -46,14 +47,32 @@
             };
 
             scope.changeStatusFormula = function(id, status){
+                var formulaName = "";
+                var formulaData = "";
+                scope.formulas.forEach(function(formula){
+                    if(formula.id == id){
+                        formulaName = formula.formulaName;
+                        formulaData = formula.formula;
+                    }
+                });
                 if("Enabled" === status){
-                    var data = creditRuleServices.getFormulaIndex(id);
-                    data.status = "Disabled";
-                    creditRuleServices.setFormulaIndex(id, data);
+                    data = {
+                        "formulaName": formulaName,
+                        "formula": formulaData,
+                        "status": "Disabled"
+                    };
+                    resourceFactory.formulaResource.editScoreFormula({formulaId: id},data, function(data){
+                        scope.initPage();
+                    });
                 }else{
-                    var data = creditRuleServices.getFormulaIndex(id);
-                    data.status = "Enabled";
-                    creditRuleServices.setFormulaIndex(id, data);
+                    data = {
+                        "formulaName": formulaName,
+                        "formula": formulaData,
+                        "status": "Enabled"
+                    };
+                    resourceFactory.formulaResource.editScoreFormula({formulaId: id},data, function(data){
+                        scope.initPage();
+                    });
                 }
             };
 
@@ -74,7 +93,11 @@
                     });
                     scope.totalRules = scope.rules.length;
                 });
-                scope.formulas = creditRuleServices.getFormulas();
+                resourceFactory.scoreFormulaResource.getScoreFormulaList({
+                }, function (data) {
+                    scope.formulas = data;
+                    scope.totalFormulas = scope.formulas.length;
+                });
             };
             scope.initPage();
 

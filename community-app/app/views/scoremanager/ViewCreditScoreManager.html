@@ -104,16 +104,16 @@
 
                 <tbody>
                     <tr dir-paginate="formula in formulas | orderBy:'displayName':reverse  | filter:filterText | itemsPerPage: rulesPerPage" class="pointer-main" total-items="totalFormulas">
-                        <td class="pointer" data-ng-click="routeToFormula($index)">{{formula.formulaname}}</td>
+                        <td class="pointer" data-ng-click="routeToFormula(formula.id)">{{formula.formulaName}}</td>
                         <td class="pointer">
                             <div ng-switch on="formula.status">
                                 <div ng-switch-when="Enabled" id="status" class="btn-group-sm">
-                                    <button id="changeStatus" ng-click="changeStatusFormula($index, formula.status)" class="btn btn-success">
+                                    <button id="changeStatus" ng-click="changeStatusFormula(formula.id, formula.status)" class="btn btn-success">
                                         {{formula.status}}
                                     </button>
                                 </div>
                                 <div ng-switch-when="Disabled" id="status" class="btn-group-sm">
-                                    <button id="changeStatus" ng-click="changeStatusFormula($index, formula.status)" class="btn btn-danger">
+                                    <button id="changeStatus" ng-click="changeStatusFormula(formula.id, formula.status)" class="btn btn-danger">
                                         {{formula.status}}
                                     </button>
                                 </div>

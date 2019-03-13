@@ -124,6 +124,9 @@
                     case "foreclosure":
                         location.path('loanforeclosure/' + accountId);
                         break;
+                    case "transferloan":
+                        location.path('/loan/' + accountId + '/transferloan');
+                        break;
                 }
             };
 
@@ -212,6 +215,10 @@
                     ],
                         options: [
                             {
+                                name: "button.transferloan",
+                                taskPermissionName: 'TRANSFERLOAN_LOAN'
+                            },
+                            {
                                 name: (scope.loandetails.loanOfficerName?"button.changeloanofficer":"button.assignloanofficer"),
                                 taskPermissionName: 'UPDATELOANOFFICER_LOAN'
                             },
@@ -275,6 +282,10 @@
                     ],
                         options: [
                             {
+                                name: "button.transferloan",
+                                taskPermissionName: 'TRANSFERLOAN_LOAN'
+                            },
+                            {
                                 name: "button.addloancharge",
                                 taskPermissionName: 'CREATE_LOANCHARGE'
                             },
@@ -319,6 +330,10 @@
                         }
                     ],
                         options: [
+                            {
+                                name: "button.transferloan",
+                                taskPermissionName: 'TRANSFERLOAN_LOAN'
+                            },
                             {
                                 name: "button.waiveinterest",
                                 taskPermissionName: 'WAIVEINTERESTPORTION_LOAN'

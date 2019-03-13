@@ -44,12 +44,38 @@ public class CommandWrapperBuilder {
     private Long creditBureauId;
     private Long organisationCreditBureauId;
     private Integer creditScoreId;
+    private Long formulaId;
    
 
     public CommandWrapper build() {
-        return new CommandWrapper(this.officeId, this.groupId, this.clientId, this.loanId, this.savingsId, this.actionName,
-                this.entityName, this.entityId, this.subentityId, this.href, this.json, this.transactionId, this.productId,
-                this.templateId,this.creditBureauId,this.organisationCreditBureauId, this.creditScoreId);
+        return new CommandWrapper(this.officeId, this.groupId, this.clientId, this.loanId, this.savingsId, this.actionName, this.entityName, this.entityId,
+                this.subentityId, this.href, this.json, this.transactionId, this.productId, this.templateId, this.creditBureauId, this.organisationCreditBureauId,
+                this.creditScoreId, this.formulaId);
+    }
+
+    public CommandWrapperBuilder transferLoan(final Long loanId) {
+        this.actionName = "TRANSFERLOAN";
+        this.entityName = "LOAN";
+        this.entityId = loanId;
+        this.loanId = loanId;
+        this.href = "/loans/" + loanId + "?command=transferloan";
+        return this;
+    }
+    
+    public CommandWrapperBuilder updateCreditScoreFormula(final long id) {
+        this.actionName = "UPDATE";
+        this.entityName = "CREDIT_SCORE_FORMULA";
+        this.entityId = id;
+        this.href = "/scoreformula/template";
+        this.formulaId = id;
+        return this;
+    }
+    
+    public CommandWrapperBuilder createCreditScoreFormula() {
+        this.actionName = "CREATE";
+        this.entityName = "CREDIT_SCORE_FORMULA";
+        this.href = "/scoreformula/template";
+        return this;
     }
     
     public CommandWrapperBuilder updateCreditScore(final int creditScoreId) {

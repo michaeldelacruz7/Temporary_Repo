@@ -30,9 +30,9 @@ import javax.persistence.TemporalType;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.fineract.infrastructure.core.api.JsonCommand;
+import org.apache.fineract.infrastructure.core.domain.AbstractPersistableCustom;
 import org.apache.fineract.useradministration.domain.AppUser;
 import org.joda.time.DateTime;
-import org.apache.fineract.infrastructure.core.domain.AbstractPersistableCustom;
 
 @Entity
 @Table(name = "m_portfolio_command_source")
@@ -104,6 +104,9 @@ public class CommandSource extends AbstractPersistableCustom<Long> {
     
     @Column(name="id")
     private Integer creditScoreId;
+    
+    @Column(name="formula_id")
+    private Long formulaId;
 
     public static CommandSource fullEntryFrom(final CommandWrapper wrapper, final JsonCommand command, final AppUser maker) {
         return new CommandSource(wrapper.actionName(), wrapper.entityName(), wrapper.getHref(), command.entityId(), command.subentityId(),
@@ -125,6 +128,14 @@ public class CommandSource extends AbstractPersistableCustom<Long> {
         this.maker = maker;
         this.madeOnDate = madeOnDateTime.toDate();
         this.processingResult = CommandProcessingResultType.PROCESSED.getValue();
+    }
+
+    public Long getFormulaId() {
+        return this.formulaId;
+    }
+
+    public void setFormulaId(Long formulaId) {
+        this.formulaId = formulaId;
     }
 
     public Integer getCreditScoreId() {

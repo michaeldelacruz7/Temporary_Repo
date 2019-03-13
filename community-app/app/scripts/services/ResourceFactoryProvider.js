@@ -742,11 +742,18 @@
                     }),
                     ruleResource: defineResource(apiVer+"/scoremanager/:ruleId", {}, {
                         getScoreRule: {method: 'GET', params: {}},
-                        editScoreRule: {method: 'PUT', params:{}},
-                        changeStatus: {method: 'PUT', params:{}}
+                        editScoreRule: {method: 'PUT', params:{}}
                     }),
                     ruleStatusResource: defineResource(apiVer+"/scoremanager/:ruleId/changestatus", {}, {
                         updateStatus: {method: 'PUT', params: {}}
+                    }),
+                    scoreFormulaResource: defineResource(apiVer+"/scoreformula", {}, {
+                        getScoreFormulaList: {method: 'GET', params: {}, isArray: true},
+                        addScoreFormula: {method: 'POST', params:{}}
+                    }),
+                    formulaResource: defineResource(apiVer+"/scoreformula/:formulaId", {}, {
+                        getScoreFormula: {method: 'GET', params: {}},
+                        editScoreFormula: {method: 'PUT', params:{}}
                     })
                 };
             }];
