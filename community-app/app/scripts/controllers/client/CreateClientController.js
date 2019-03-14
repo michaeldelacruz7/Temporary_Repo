@@ -43,6 +43,12 @@
             scope.date = {};
             scope.productId = null;
             scope.previewRepayment = false;
+            scope.disabled = true;
+            scope.interest = "";
+            scope.noOfRepayment = "";
+            scope.loanTerm = "";
+            scope.loanPurpose = "";
+            scope.enableLoanOption = false;
 
 
             var requestParams = {staffInSelectedOfficeOnly:true};
@@ -139,7 +145,6 @@
                 scope.genderIdOptions=data.familyMemberOptions.genderIdOptions;
                 scope.maritalStatusIdOptions=data.familyMemberOptions.maritalStatusIdOptions;
                 scope.professionIdOptions=data.familyMemberOptions.professionIdOptions;
-
 
 
             });
@@ -553,8 +558,11 @@
                     scope.loanaccountinfo = data;
                     scope.previewClientLoanAccInfo();
                     scope.datatablesLoan = data.datatables;
-                    // scope.handleDatatables(scope.datatablesLoan);
+                    scope.interest = data.interestRatePerPeriod + "%";
+                    scope.noOfRepayment = data.numberOfRepayments;
+                    scope.loanTerm = data.termFrequency + " " + data.termPeriodFrequencyType.value;
                     scope.disabled = false;
+                    // scope.handleDatatables(scope.datatablesLoan);
                 });
 
                 resourceFactory.loanResource.get({resourceType: 'template', templateType: 'collateral', productId: loanProductId, fields: 'id,loanCollateralOptions'}, function (data) {
@@ -662,6 +670,12 @@
                     return obj[findattr] === model;
                 })[retAttr];
             };
+
+            scope.enabledLoan = function($index){
+                if($index == scope.datatables.length - 1){
+                    scope.enableLoanOption = true;
+                }
+            }
         }
     });
     mifosX.ng.application.controller('CreateClientController', ['$scope', 'ResourceFactory', '$location', '$http', 'dateFilter', 'API_VERSION', 'Upload', '$rootScope', '$routeParams', 'WizardHandler', mifosX.controllers.CreateClientController]).run(function ($log) {
