@@ -15,7 +15,7 @@
             'webstorage': '../bower_components/angular-webstorage/angular-webstorage.min',
             'require-css': '../bower_components/require-css/css',
             'd3': '../bower_components/d3/d3.min',
-            'nvd3': '../bower_components/nvd3/build/nv.d3.min',
+            'nvd3': '../bower_components/nvd3/nv.d3.min',
             'nvd3ChartDirectives': '../scripts/modules/angularjs-nvd3-directives',
             'styles': '../styles',
             'test': '../test/functional',
@@ -36,7 +36,8 @@
             'webcam-directive':'../bower_components/webcam-directive/dist/webcam.min',
             'angular-wizard': '../scripts/modules/angular-wizard',
             'angular-utils-pagination':'../bower_components/angular-utils-pagination/dirPagination.min',
-            'ng-scrollbar':'../bower_components/ng-scrollbar/dist/ng-scrollbar.min'
+            'ng-scrollbar':'../bower_components/ng-scrollbar/dist/ng-scrollbar.min',
+            'angular-drag-and-drop-lists': '../bower_components/angular-drag-and-drop-lists/angular-drag-and-drop-lists.min'
         },
         shim: {
             'angular': { deps: ['jquery','chosen.jquery.min'], exports: 'angular' },
@@ -68,6 +69,7 @@
             'angular-wizard': {deps: ['angular', 'underscore']},
             'angular-utils-pagination': {deps: ['angular']},
             'ng-scrollbar': {deps: ['angular']},
+            'angular-drag-and-drop-lists': {deps: ['angular']},
             'mifosX': {
                 deps: [
                     'angular',
@@ -97,7 +99,8 @@
                     'angular-wizard',
                     'webcam-directive',
                     'angular-utils-pagination',
-                    'ng-scrollbar'
+                    'ng-scrollbar',
+                    'angular-drag-and-drop-lists'
                 ],
                 exports: 'mifosX'
             }
