@@ -598,7 +598,7 @@ public class ClientWritePlatformServiceJpaRepositoryImpl implements ClientWriteP
             final AppUser currentUser = this.context.authenticatedUser();
             client.activate(currentUser, fmt, activationDate);
             CommandProcessingResult result = openSavingsAccount(client, fmt);
-            this.clientRepository.saveAndFlush(client);
+            this.clientRepository.save(client);
             this.businessEventNotifierService.notifyBusinessEventWasExecuted(BUSINESS_EVENTS.CLIENTS_ACTIVATE,
                     constructEntityMap(BUSINESS_ENTITY.CLIENT, client));
             return new CommandProcessingResultBuilder() //

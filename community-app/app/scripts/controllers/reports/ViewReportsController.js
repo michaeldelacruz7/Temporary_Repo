@@ -62,7 +62,72 @@
             } else if (routeParams.type == 'accounting') {
                 resourceFactory.runReportsResource.get({reportSource: 'reportCategoryList', R_reportCategory: 'Accounting', parameterType: true, genericResultSet: false}, function (data) {
                     scope.reports = scope.getReports(data);
+                    scope.addReports();
                 });
+            }
+
+            scope.addReports = function(){
+                var addedReport = {"report_id": 555,
+                        "report_name": "Audited Financial Statement Report",
+                        "report_type": "HTML",
+                        "report_subtype": null,
+                        "report_category": "Accounting",
+                        "parameter_id": 85,
+                        "report_parameter_name": "branch",
+                        "parameter_name": "OfficeIdSelectOne",
+                        "route": "/report/audited_financial_statement"};
+                scope.reports.push(addedReport);
+                var addedReport = {"report_id": 556,
+                        "report_name": "Annual Information Statement Report",
+                        "report_type": "xlsx",
+                        "report_subtype": null,
+                        "report_category": "Accounting",
+                        "parameter_id": 85,
+                        "report_parameter_name": "branch",
+                        "parameter_name": "OfficeIdSelectOne",
+                        "route": "/report/annual_information_statement_report"};
+                scope.reports.push(addedReport);
+
+                var addedReport = {"report_id": 557,
+                        "report_name": "Interim Semi-Annual Financial Statement Report",
+                        "report_type": "zip",
+                        "report_subtype": null,
+                        "report_category": "Accounting",
+                        "parameter_id": 85,
+                        "report_parameter_name": "branch",
+                        "parameter_name": "OfficeIdSelectOne",
+                        "route": "/report/interim_semi-annual_financial_statement_report"};
+                scope.reports.push(addedReport);
+
+                var addedReport = {"report_id": 558,
+                        "report_name": "Issuers of Exempt Commercial Paper Quarterly Report",
+                        "report_type": "xlsx",
+                        "report_subtype": null,
+                        "report_category": "Accounting",
+                        "parameter_id": 85,
+                        "report_parameter_name": "branch",
+                        "parameter_name": "OfficeIdSelectOne",
+                        "route": "/report/issuers_of_exempt_commercial_paper_quarterly_report"};
+                scope.reports.push(addedReport);
+
+                var addedReport = {"report_id": 559,
+                        "report_name": "Special Form of Financial Statement Report",
+                        "report_type": "PDF",
+                        "report_subtype": null,
+                        "report_category": "Accounting",
+                        "parameter_id": 85,
+                        "report_parameter_name": "branch",
+                        "parameter_name": "OfficeIdSelectOne",
+                        "route": "/report/special_form_of_financial_statement_report"};
+                scope.reports.push(addedReport);
+            };
+
+            scope.notSpecialReport = function(report){
+                return report.report_id != 555 && report.report_id != 556 && report.report_id != 557 && report.report_id != 558 && report.report_id != 559;
+            }
+
+            scope.specialReport = function(report){
+                return report.report_id == 555 || report.report_id == 556 || report.report_id == 557 || report.report_id == 558 || report.report_id == 559;
             }
 
             scope.ReportsPerPage = 15;
@@ -79,6 +144,10 @@
                     prevId = currId;
                 }
                 return reports;
+            };
+
+            scope.specialRoute = function(report){
+                location.path(report.route);
             };
         }
     });

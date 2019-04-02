@@ -1049,6 +1049,24 @@
             .when('/loan/:loanId/transferloan', {
                 templateUrl: 'views/loans/loantransfer.html'
             })
+            .when('/workflow', {
+                templateUrl: 'views/administration/workflow.html'
+            })
+            .when('/report/audited_financial_statement', {
+                templateUrl: 'views/reports/audited_financial_statement_report.html'
+            })
+            .when('/report/annual_information_statement_report', {
+                templateUrl: 'views/reports/annual_information_statement_report.html'
+            })
+            .when('/report/interim_semi-annual_financial_statement_report', {
+                templateUrl: 'views/reports/interim_semi-annual_financial_statement_report.html'
+            })
+            .when('/report/issuers_of_exempt_commercial_paper_quarterly_report', {
+                templateUrl: 'views/reports/issuers_of_exempt_commercial_paper_quarterly_report.html'
+            })
+            .when('/report/special_form_of_financial_statement_report', {
+                templateUrl: 'views/reports/special_form_of_financial_statement_report.html'
+            })
             .otherwise({
                 templateUrl: "views/errors/404.html"
             })

@@ -337,7 +337,9 @@ define(['Q', 'underscore', 'mifosX'], function (Q) {
             'scoremanager/AddFormulaController',
             'scoremanager/ViewFormulaController',
             'scoremanager/EditFormulaController',
-            'loanAccount/LoanTransferController'
+            'loanAccount/LoanTransferController',
+            'configurations/WorkflowController',
+            'reports/StaticController'
 
         ],
         filters: [
